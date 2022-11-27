@@ -10,6 +10,7 @@ import Navbar from "./components/NavBar";
 import Loading from "./components/Loading";
 import { useSelector } from "react-redux";
 
+
 function App() {
   const isLoading = useSelector((state) => state.isLoading);
 

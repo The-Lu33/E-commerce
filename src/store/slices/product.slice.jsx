@@ -13,10 +13,22 @@ export const getProductThunk = () => (dispatch) => {
   dispatch(setIsloading(true));
   axios
     .get("https://e-commerce-api.academlo.tech/api/v1/products")
-    .then((res) => dispatch(setProducts(res.data)))
+    .then((res) => dispatch(setProducts(res.data.data.products)))
     .finally(() => dispatch(setIsloading(false)));
 };
-console.log(products);
+export const filterProductsThunk = (id) => (dispatch) => {
+  dispatch(setIsloading(true));
+  axios
+    .get(`https://e-commerce-api.academlo.tech/api/v1/products?category=${id}`)
+    .then((res) => dispatch(setProducts(res.data.data.products)))
+    .finally(() => dispatch(setIsloading(false)));
+};
+export const filterInputProductsThunk = (inputValue) => (dispatch) => {
+    dispatch(setIsloading(true));
+    return axios.get(`https://e-commerce-api.academlo.tech/api/v1/products?query=${inputValue}`)
+        .then((res) => dispatch(setProducts(res.data.data.products)))
+        .finally(() => dispatch(setIsloading(false)));
+}
 
 export const { setProducts } = products.actions;
 
