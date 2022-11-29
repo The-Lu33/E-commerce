@@ -8,14 +8,12 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
+import InputSearchs from "../components/InputSearchs";
 
 const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   const [categorys, setCategorys] = useState([]);
-  const [inputValue, setInputValue] = useState("");
   useEffect(() => {
     dispatch(getProductThunk());
 
@@ -30,56 +28,42 @@ const Home = () => {
   return (
     <div className="home">
       <div className="filter">
-        <Form.Select
-          aria-label="Default select example"
-          onChange={filterProducts}>
+        <select name="" id="" onChange={filterProducts} className='select'>
           <option value={getProductThunk}>All</option>
-          {categorys.map((category) => (
-            <option value={category.id}>{category.name}</option>
+
+        {categorys.map((category) => (
+          <option value={category.id}>{category.name}</option>
           ))}
-        </Form.Select>
+          </select>
+          <i className="arrow"><img src="./image/arrow-down.svg" style={{width:'rem'}}></img></i>
       </div>
-      <div>
-        <InputGroup className="mb-3">
-          <Form.Control
-            placeholder="Recipient's username"
-            aria-label="Recipient's username"
-            aria-describedby="basic-addon2"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-          <Button
-            variant="outline-secondary"
-            id="button-addon2"
-            onClick={() => dispatch(filterInputProductsThunk(inputValue))}>
-            Search
-          </Button>
-        </InputGroup>
-      </div>
-
       <div className="products_container">
-        {products?.map((product, index) => (
-          <div className="products_card">
-            <div className="product" key={products.id}>
-              <Link to={`/product/${product.id}`}>
-                <div className="img_product">
-                  <img src={product.productImgs[0]} alt="product" />
-                </div>
-                <div className="info">
-                  <h3>{product.title}</h3>
+        <InputSearchs />
 
-                  <h6>price</h6>
-                  <h3>
-                    <span>{product.price}</span>
-                  </h3>
-                </div>
-              </Link>
-              <button>
-                <img src="./image/bxs-cart.svg" alt="" />
-              </button>
+        <div className="products_cards_container">
+          {products?.map((product, index) => (
+            <div className="products_card">
+              <div className="product" key={products.id}>
+                <Link to={`/product/${product.id}`}>
+                  <div className="img_product">
+                    <img src={product.productImgs[0]} alt="product" />
+                  </div>
+                  <div className="info">
+                    <h3>{product.title}</h3>
+
+                    <h6>price</h6>
+                    <h3>
+                      <span>{product.price}</span>
+                    </h3>
+                  </div>
+                </Link>
+                <button>
+                  <img src="./image/bxs-cart.svg" alt="" />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
