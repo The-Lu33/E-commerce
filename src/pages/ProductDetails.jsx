@@ -24,34 +24,23 @@ const ProductDetails = () => {
     <div>
       <div className="product_container_details">
         <div className="slide_container">
-          <Carousel
-            fade
-            w-50
-            variant="dark"
-            nextIcon={null}
-            prevIcon={null}
-            pause={"hover"}
-            touch={true}>
+          <Carousel fade variant="dark" pause={"hover"} touch={true} >
             {oneProduct?.productImgs.map((productImg) => (
-              <Carousel.Item onSlid>
-                <img className="d-block w-100" src={productImg} alt="" />
+              <Carousel.Item onSlid style={{height:'500px'}}>
+                <img className="d-block w-100 h-100" src={productImg} alt="" style={{objectFit:'contain'}}/>
               </Carousel.Item>
             ))}
           </Carousel>
         </div>
         <div className="information_product">
           <h4>{oneProduct?.title}</h4>
-          <h5>{oneProduct?.description}</h5>
+          <span>{oneProduct?.description}</span>
 
           <div>
             <span>price</span>
-            <h5>
-              {oneProduct?.price}
-            </h5>
+            <h5>{oneProduct?.price}</h5>
             <div>
-              <span>
-                Quantity
-              </span>
+              <span>Quantity</span>
               <h5>0</h5>
             </div>
           </div>
@@ -69,29 +58,29 @@ const ProductDetails = () => {
         ))}
       </div> */}
       <div className="products_cards_container">
-          {relateProducts?.map((relateProduct, index) => (
-            <div className="products_card">
-              <div className="product" key={relateProduct.id}>
-                <Link to={`/product/${relateProduct.id}`}>
-                  <div className="img_product">
-                    <img src={relateProduct.productImgs[0]} alt="product" />
-                  </div>
-                  <div className="info">
-                    <h3>{relateProduct.title}</h3>
+        {relateProducts?.map((relateProduct, index) => (
+          <div className="products_card">
+            <div className="product" key={relateProduct.id}>
+              <Link to={`/product/${relateProduct.id}`}>
+                <div className="img_product">
+                  <img src={relateProduct.productImgs[0]} alt="product" />
+                </div>
+                <div className="info">
+                  <h3>{relateProduct.title}</h3>
 
-                    <h6>price</h6>
-                    <h3>
-                      <span>{relateProduct.price}</span>
-                    </h3>
-                  </div>
-                </Link>
-                <button>
-                  <img src="./image/bxs-cart.svg" alt="" />
-                </button>
-              </div>
+                  <h6>price</h6>
+                  <h3>
+                    <span>{relateProduct.price}</span>
+                  </h3>
+                </div>
+              </Link>
+              <button className="btn_cart">
+                <img src="./image/bxs-cart.svg" alt="" />
+              </button>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

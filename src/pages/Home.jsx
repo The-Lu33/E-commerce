@@ -42,8 +42,8 @@ const Home = () => {
 
         <div className="products_cards_container">
           {products?.map((product, index) => (
-            <div className="products_card">
-              <div className="product" key={products.id}>
+            <div className="products_card" key={products.id}>
+              <div className="product" >
                 <Link to={`/product/${product.id}`}>
                   <div className="img_product">
                     <img src={product.productImgs[0]} alt="product" />
@@ -57,7 +57,7 @@ const Home = () => {
                     </h3>
                   </div>
                 </Link>
-                <button>
+                <button className="btn_cart">
                   <img src="./image/bxs-cart.svg" alt="" />
                 </button>
               </div>
