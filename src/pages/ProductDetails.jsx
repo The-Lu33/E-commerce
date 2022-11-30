@@ -24,39 +24,53 @@ const ProductDetails = () => {
     <div>
       <div className="product_container_details">
         <div className="slide_container">
-          <Carousel fade variant="dark" pause={"hover"} touch={true} >
+          <Carousel fade variant="dark" pause={"hover"} touch={true}>
             {oneProduct?.productImgs.map((productImg) => (
-              <Carousel.Item onSlid style={{height:'500px'}}>
-                <img className="d-block w-100 h-100" src={productImg} alt="" style={{objectFit:'contain'}}/>
+              <Carousel.Item onSlid style={{ height: "500px" }}>
+                <img
+                  className="d-block w-100 h-100"
+                  src={productImg}
+                  alt=""
+                  style={{ objectFit: "contain" }}
+                />
               </Carousel.Item>
             ))}
           </Carousel>
         </div>
         <div className="information_product">
           <h4>{oneProduct?.title}</h4>
-          <span>{oneProduct?.description}</span>
-
-          <div>
-            <span>price</span>
-            <h5>{oneProduct?.price}</h5>
+          <div className="seleprice">
+            <div className="price">
+              <span>price</span>
+              <h4>{oneProduct?.price}</h4>
+            </div>
             <div>
               <span>Quantity</span>
-              <h5>0</h5>
+              <div className="quantity_function">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+              </div>
             </div>
+          </div>
+
+          <div>
+            <button className="btn_add_cart">
+              Add to Cart{" "}
+              <i>
+                <img
+                  src="./image/bxs-cart.svg"
+                  className="cart_add_description"
+                />
+              </i>
+            </button>
+          </div>
+          <div className="description_product">
+            <span>{oneProduct?.description}</span>
           </div>
         </div>
       </div>
       <br />
-      {/* <div>
-        {relateProducts.map((relateProduct) => (
-          <Link to={`/product/${relateProduct.id}`}>
-            <h2>{relateProduct.title}</h2>
-            <div>
-              <img src={relateProduct?.productImg[0]} alt="" />
-            </div>
-          </Link>
-        ))}
-      </div> */}
       <div className="products_cards_container">
         {relateProducts?.map((relateProduct, index) => (
           <div className="products_card">
@@ -67,11 +81,10 @@ const ProductDetails = () => {
                 </div>
                 <div className="info">
                   <h3>{relateProduct.title}</h3>
-
-                  <h6>price</h6>
-                  <h3>
-                    <span>{relateProduct.price}</span>
-                  </h3>
+                  <div className="price">
+                    <span>price</span>
+                    <h4>{relateProduct.price}</h4>
+                  </div>
                 </div>
               </Link>
               <button className="btn_cart">

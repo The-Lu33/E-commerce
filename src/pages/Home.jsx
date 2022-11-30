@@ -50,11 +50,13 @@ const Home = () => {
                   </div>
                   <div className="info">
                     <h3>{product.title}</h3>
+                  <div className="price">
 
-                    <h6>price</h6>
-                    <h3>
-                      <span>{product.price}</span>
-                    </h3>
+                    <span>price</span>
+                    <h4>
+                    {product.price}
+                    </h4>
+                  </div>
                   </div>
                 </Link>
                 <button className="btn_cart">
