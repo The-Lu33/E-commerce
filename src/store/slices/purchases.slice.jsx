@@ -16,5 +16,6 @@ export const getPurchaseThunk = () => (dispatch) => {
     .then((res) => dispatch(setPurchase(res.data.data.purchases)))
     .finally(() => dispatch(setIsloading(false)));
 };
+
 export const { setPurchase } = purchases.actions;
 export default purchases.reducer;

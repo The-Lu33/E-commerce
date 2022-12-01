@@ -261,6 +261,35 @@ select:focus + .arrow {
   margin-top: 3rem;
   padding: 1rem;
 }
+.Purchase{
+  padding: 1rem;
+ 
+}
+.Purchase>h4{
+  /* margin-left: 8rem; */
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.products_purchase{
+  border: 1px solid #ff3d00;
+  margin: 1rem auto;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 10px;
+}
+.card_products_purchases{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  padding:1rem;
+  margin: 0 auto;
+  text-align: right;
+  gap: .5rem;
+}
+.date_product_purchase{
+  border-bottom: 1px solid #ff3d00;
+  padding: 1rem;
+}
 @media screen and (min-width: 576px) {
   .products_cards_container {
   }

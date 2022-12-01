@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { postCartProductThunk } from "../store/slices/cartProducts.slice";
 import { getProductThunk } from "../store/slices/product.slice";
 
 const ProductDetails = () => {
@@ -18,7 +19,27 @@ const ProductDetails = () => {
   const relateProducts = products.filter(
     (product) => product.category.id === oneProduct.category?.id
   );
-  console.log(oneProduct);
+  // console.log(oneProduct);
+
+  const [quantity, setQuantity] = useState(1);
+
+  const addQuantity = () => {
+    return setQuantity(quantity + 1);
+  };
+  const subQuantity = () => {
+   
+      return setQuantity(quantity - 1);
+    
+  };
+  const addToCart = () => {
+    const add = {
+      id: oneProduct?.id,
+      quantity: quantity,
+    };
+    dispatch(postCartProductThunk(add));
+    console.log(add);
+  };
+  // console.log(postCartProductThunk);
 
   return (
     <div>
@@ -47,15 +68,14 @@ const ProductDetails = () => {
             <div>
               <span>Quantity</span>
               <div className="quantity_function">
-                <button>-</button>
-                <span>1</span>
-                <button>+</button>
+                <button onClick={subQuantity}>-</button>
+                <span>{quantity}</span>
+                <button onClick={addQuantity}>+</button>
               </div>
             </div>
           </div>
-
           <div>
-            <button className="btn_add_cart">
+            <button className="btn_add_cart" onClick={addToCart}>
               Add to Cart{" "}
               <i>
                 <img

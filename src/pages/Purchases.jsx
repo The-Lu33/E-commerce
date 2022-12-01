@@ -1,54 +1,89 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPurchaseThunk } from "../store/slices/purchases.slice";
-
+import { getProductThunk } from "../store/slices/product.slice";
+import { Link } from "react-router-dom";
 const Purchases = () => {
   const dispatch = useDispatch();
-    const purchase = useSelector(state => state.purchase)
+  const purchase = useSelector((state) => state.purchase);
+  const productsImage = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(getPurchaseThunk());
+    dispatch(getProductThunk());
+    formateDate();
   }, []);
+
+  // filtrando ids
+  // const purchaseFilterIdProduct = purchase.map((selectProducts) => {
+  //     let selectProductsId = selectProducts.cart?.products;
+  //     selectProductsId = selectProductsId?.map((selectProductId) => {
+  //         return selectProductId;
+  //       });
+  //       return selectProductsId;
+  //     });
+
+  //     const filterIdImage = (purchaseId2, productId1) => {
+  //   const productsImageFilter = purchaseId2.filter(
+  //     (productFilter) => purchaseFilterIdProduct.id === productId1.id
+  //   );
+  //   return productsImageFilter;
+  // }
+  // // console.log(filterIdImage(purchaseFilterIdProduct,productsImage));
+
+  const formateDate = (form) => {
+    const date = new Date(form);
+    let newForm = date.toLocaleDateString();
+    let mouth = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "Octuber",
+      "November",
+      "December",
+    ];
+    let formate = null;
+    formate = newForm.split("/");
+    formate[1] = parseInt(formate[1]);
+    for (let i = 0; i < mouth.length; i++) {
+      if (formate[1] === i + 1) {
+        formate[1] = mouth[i];
+      }
+    }
+    formate = `${formate[1]} ${formate[0]} ${formate[2]}`;
+    return formate.toString();
+  };
+
   console.log(purchase);
-  // const formateDate = (form) => {
-  //   const date = form.toLocaleDateString();
-  //   let mouth = [
-  //     "January",
-  //     "February",
-  //     "March",
-  //     "April",
-  //     "May",
-  //     "June",
-  //     "July",
-  //     "August",
-  //     "September",
-  //     "Octuber",
-  //     "November",
-  //     "December",
-  //   ];
-  //   let formate = null;
-  //   formate = date.split("/");
-  //   console.log(formate);
-  //   formate[1] = parseInt(formate[1]);
-  //   for (let i = 0; i < mouth.length; i++) {
-  //     if (formate[1] === i + 1) {
-  //       formate[1] = mouth[i];
-  //       console.log(formate);
-  //     }
-  //   }
-  //   formate = `${formate[0]} ${formate[1]} ${formate[2]}`;
-  //   return formate;
-  // };
-
+  console.log("-******-");
+  // console.log(productsImage);
   return (
-    <div>
-      <h2>Purchases</h2>
+    <div className="Purchase">
+
+      <h4>My Purchase</h4>
       <div>
-
-      { purchase.map((purchaseProduct) =>(
-        <h3>{purchaseProduct.createdAt.toDateString()}</h3>
+        {purchase.map((purchaseProduct) => (
+          <div className="products_purchase">
+            <h5 className="date_product_purchase">{formateDate(purchaseProduct.createdAt)}</h5>
+            {console.log('**/*****0')}
+            {purchaseProduct.cart.products.map((productPurchases) => (
+              <div  className="card_products_purchases">
+                {/* {filterIdImage(purchaseFilterIdProduct,productsImage)} */}
+                
+                
+                <Link to={`/product/${productPurchases.id}`}>{productPurchases.title}</Link>
+                <h6>{productPurchases.productsInCart.quantity}</h6>
+                <h6>{productPurchases.price}$</h6>
+              </div>
+            ))}
+          </div>
         ))}
-        </div>
-
+      </div>
     </div>
   );
 };
